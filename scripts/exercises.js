@@ -1,5 +1,7 @@
-import excer from './01.js';
-import excer02 from './02.js';
+import ex from './01.js';
+import ex02 from './02.js';
+import ex03 from './03.js';
+import ex04 from './04.js';
 
 const modal = document.getElementsByClassName("modal")[0];
 const functionName = document.getElementsByClassName("functionName")[0];
@@ -15,8 +17,15 @@ const textField02 = document.getElementsByClassName("secondTextField")[0];
 const submit = document.getElementsByClassName("submit")[0];
 const btnInvertWords = document.getElementById("invertWord");
 const btnDupliWords = document.getElementById("dupliWords");
-const btnPalindrome = document.getElementById("Palindrome");
+const btnPalindrome = document.getElementById("palindrome");
 const btnDeletePattern = document.getElementById("deletePattern");
+const btnRandom = document.getElementById("random");
+const btnPalindromeNumber = document.getElementById("palindromeNumber");
+const btnFactorial = document.getElementById("factorial");
+const btnIsPrimeNumber = document.getElementById("primeNumber");
+const btnIsNumberEven = document.getElementById("numberIsEven");
+const btnCelsiusToFarenheitConverter = document.getElementById("celsiusToFarenheitConverter");
+const tempAll = document.getElementsByClassName("temp");
 
 btnCountChar.onclick = function () {
     functionName.innerHTML = "Count Characters"
@@ -29,7 +38,7 @@ btnCountChar.onclick = function () {
         }
         else {
             response.style.color = "black";
-            response.innerHTML = `The number of characters in the sentence is ${excer.countChar(textField.value)}`;
+            response.innerHTML = `The number of characters in the sentence is ${ex.countChar(textField.value)}`;
         }
     }
 }
@@ -54,7 +63,7 @@ btnCutWords.onclick = function () {
         }
         else {
             response.style.color = "black";
-            response.innerHTML = `The sentence is ${excer.cutString(textField.value, textField02.value)}`;
+            response.innerHTML = `The sentence is ${ex.cutString(textField.value, textField02.value)}`;
         }
     }
 }
@@ -72,7 +81,7 @@ btnSplitWords.onclick = function () {
         }
         else {
             response.style.color = "black";
-            response.innerHTML = `The words are ${excer.splitString(textField.value, textField02.value)}`;
+            response.innerHTML = `The words are ${ex.splitString(textField.value, textField02.value)}`;
         }
     }
 }
@@ -92,7 +101,7 @@ btnRepWords.onclick = function () {
         }
         else {
             response.style.color = "black";
-            response.innerHTML = `Sentences: ${excer.repeatString(" " + textField.value, textField02.value)}`;
+            response.innerHTML = `Sentences: ${ex.repeatString(" " + textField.value, textField02.value)}`;
         }
     }
 
@@ -111,7 +120,7 @@ btnInvertWords.onclick = function () {
         else {
             response.style.color = "black";
             response.innerHTML = `Sentence:
-            ${excer02.invertSring(textField.value)}`;
+            ${ex02.invertSring(textField.value)}`;
         }
     }
 
@@ -121,7 +130,7 @@ btnDupliWords.onclick = function () {
     functionName.innerHTML = "Duplicated Words"
     modal.style.display = "block";
     introText.textContent = `Enter a sentence, a word in the sentence and
-    press submit to know if how many times that word is in the sentence.`
+    press submit to know how many times that word is in the sentence.`
     textField02.style.display = "inline-block";
     submit.onclick = function () {
         if (textField.value === "") {
@@ -135,7 +144,7 @@ btnDupliWords.onclick = function () {
         else {
             response.style.color = "black";
             response.innerHTML = `Sentences:
-            ${excer02.duplicatedWords(textField.value, textField02.value)}`;
+            ${ex02.duplicatedWords(textField.value, textField02.value)}`;
         }
     }
 
@@ -152,7 +161,7 @@ btnPalindrome.onclick = function () {
             response.style.color = "red";
         }
         else {
-            if (excer02.palindrome(textField.value)) {
+            if (ex02.palindrome(textField.value)) {
                 response.style.color = "black";
                 response.innerHTML = `The Sentence is a palindrome`
             }
@@ -183,16 +192,149 @@ btnDeletePattern.onclick = function () {
         else {
             response.style.color = "black";
             response.innerHTML = `New Sentence:
-            ${excer02.deletePattern(textField.value, textField02.value)}`;
+            ${ex02.deletePattern(textField.value, textField02.value)}`;
         }
     }
 
 }
 
+btnRandom.onclick = function () {
+    functionName.innerHTML = "Random Number"
+    modal.style.display = "block";
+    introText.textContent = "Press submit to show a number between 501 and 600."
+    textField.style.display = "none";
+    submit.onclick = function () {
+        response.innerHTML = ex03.random();
+    }
+}
+
+btnPalindromeNumber.onclick = function () {
+    functionName.innerHTML = "Palindrome Number"
+    modal.style.display = "block";
+    introText.textContent = "Enter a number and press submit to know if that number is a Palindrome Number."
+    submit.onclick = function () {
+        if (textField.value === "") {
+            response.innerHTML = "The field is empty";
+            response.style.color = "red";
+        }
+        else if (isNaN(textField.value)) {
+            response.innerHTML = "The field is not a number";
+            response.style.color = "red";
+        }
+        else {
+            response.style.color = "black";
+            if (ex03.palindromicNumber(textField.value)) response.innerHTML = `The number  is a palindrome number`;
+            else response.innerHTML = `The number  is not a palindrome number`;
+        }
+    }
+}
+
+btnFactorial.onclick = function () {
+    functionName.innerHTML = "Factorial"
+    modal.style.display = "block";
+    introText.textContent = "Enter a number and press submit to know the factorial of that number."
+    submit.onclick = function () {
+        if (textField.value === "") {
+            response.innerHTML = "The field is empty";
+            response.style.color = "red";
+        }
+        else if (isNaN(textField.value)) {
+            response.innerHTML = "The field is not a number";
+            response.style.color = "red";
+        }
+        else {
+            response.style.color = "black";
+            response.innerHTML = ex03.factorial(textField.value);
+        }
+    }
+}
+
+btnIsPrimeNumber.onclick = function () {
+    functionName.innerHTML = "Is Number a Prime?"
+    modal.style.display = "block";
+    introText.textContent = `Enter a number a press submit to know if the number is prime.`
+    submit.onclick = function () {
+        if (textField.value === "") {
+            response.innerHTML = "The field is empty";
+            response.style.color = "red";
+        }
+        else if (isNaN(textField.value)) {
+            response.innerHTML = "The field is not a number";
+            response.style.color = "red";
+        }
+        else if (textField.value == 0) {
+            response.innerHTML = "0 is a composite number";
+            response.style.color = "black";
+        }
+        else if (textField.value == 1) {
+            response.innerHTML = "1 is not a prime or a composite number";
+            response.style.color = "black";
+        }
+        else {
+            response.style.color = "black";
+            if (ex04.primeNumber(textField.value)) response.innerHTML = `${textField.value} is a prime number`;
+            else response.innerHTML = `${textField.value} is a composite number`;
+        }
+    }
+}
+btnIsNumberEven.onclick = function () {
+    functionName.innerHTML = "Is Number even?"
+    modal.style.display = "block";
+    introText.textContent = `Enter a number a press submit to know if the number is an even number.`
+    submit.onclick = function () {
+        if (textField.value === "") {
+            response.innerHTML = "The field is empty";
+            response.style.color = "red";
+        }
+        else if (isNaN(textField.value)) {
+            response.style.color = "red";
+            response.innerHTML = "The field is not a number";
+        }
+        else {
+            response.style.color = "black";
+            if (ex04.numberIsEven(textField.value)) response.innerHTML = `${textField.value} is even`;
+            else response.innerHTML = `${textField.value} is odd`;
+        }
+    }
+}
+
+btnCelsiusToFarenheitConverter.onclick = function () {
+    functionName.innerHTML = "Temperature Converter"
+    for (let i = 0; i < tempAll.length; i++) {
+        tempAll[i].style.display = "inline-block";
+    }
+    modal.style.display = "block";
+    introText.textContent = `Enter a number, select F to convert from Celsius to Farenheit or C to
+    convert from Farenheit to Celsius and press submit to delete that pattern from the sentence.`
+    submit.onclick = function () {
+        if (textField.value === "") {
+            response.style.color = "red";
+            response.innerHTML = "There are no numbers to convert";
+        }
+        else if (isNaN(textField.value)) {
+            response.style.color = "red";
+            response.innerHTML = "The value of the field is not a number";
+        }
+        else {
+            response.style.color = "black";
+            if (tempAll[0].checked) {
+                response.innerHTML = `The new Temperature is
+                ${ex04.celsiusToFarenheitConverter(textField.value, 'C')}`;
+            }
+            else response.innerHTML = `The new Temperature is
+                ${ex04.celsiusToFarenheitConverter(textField.value, 'F')}`;
+        }
+    }
+
+}
 
 span.onclick = function () {
     modal.style.display = "none";
     response.textContent = "";
+    textField.style.display = "inline-block";
     textField02.style.display = "none";
     textField02.type = "text";
+    for (let i = 0; i < tempAll.length; i++) {
+        tempAll[i].style.display = "none";
+    }
 }

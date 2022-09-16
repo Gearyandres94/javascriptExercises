@@ -45,3 +45,7 @@
 .response {
   margin-top: 10px;
 }
+
+.temp {
+  display: none;
+}

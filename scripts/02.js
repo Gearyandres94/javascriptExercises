@@ -15,7 +15,6 @@ const duplicatedWords = (phrase, word) => {
 };
 
 const palindrome = (str) => {
-    console.log('str', str);
     const re = /[\W_]/g;
     const lowRegStr = str.toLowerCase().replace(re, '');
     const reverseStr = lowRegStr.split('').reverse().join('');
@@ -24,7 +23,6 @@ const palindrome = (str) => {
 
 const deletePattern = (str, chars) => {
     const regEx = new RegExp(`${chars}`, 'g');
-    console.log('regEx', regEx);
     str = str.replace(regEx, "");
     return str;
 }
