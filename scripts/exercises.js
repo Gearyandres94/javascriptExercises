@@ -2,6 +2,7 @@ import ex from './01.js';
 import ex02 from './02.js';
 import ex03 from './03.js';
 import ex04 from './04.js';
+import ex05 from './05.js'
 
 const modal = document.getElementsByClassName("modal")[0];
 const functionName = document.getElementsByClassName("functionName")[0];
@@ -26,6 +27,9 @@ const btnIsPrimeNumber = document.getElementById("primeNumber");
 const btnIsNumberEven = document.getElementById("numberIsEven");
 const btnCelsiusToFarenheitConverter = document.getElementById("celsiusToFarenheitConverter");
 const tempAll = document.getElementsByClassName("temp");
+const btnNumericalConverter = document.getElementById("numericalConverter");
+const btnDiscount = document.getElementById("discount");
+const btnYearsPassed = document.getElementById("yearsPassed");
 
 btnCountChar.onclick = function () {
     functionName.innerHTML = "Count Characters"
@@ -242,6 +246,10 @@ btnFactorial.onclick = function () {
             response.innerHTML = "The field is not a number";
             response.style.color = "red";
         }
+        else if (textField.value < 1) {
+            response.innerHTML = "The value can not be less than 1";
+            response.style.color = "red";
+        }
         else {
             response.style.color = "black";
             response.innerHTML = ex03.factorial(textField.value);
@@ -303,9 +311,11 @@ btnCelsiusToFarenheitConverter.onclick = function () {
     for (let i = 0; i < tempAll.length; i++) {
         tempAll[i].style.display = "inline-block";
     }
+    tempAll[1].innerHTML = "C";
+    tempAll[3].innerHTML = "F";
     modal.style.display = "block";
     introText.textContent = `Enter a number, select F to convert from Celsius to Farenheit or C to
-    convert from Farenheit to Celsius and press submit to delete that pattern from the sentence.`
+    convert from Farenheit to Celsius and press submit to do the conversion.`
     submit.onclick = function () {
         if (textField.value === "") {
             response.style.color = "red";
@@ -313,20 +323,129 @@ btnCelsiusToFarenheitConverter.onclick = function () {
         }
         else if (isNaN(textField.value)) {
             response.style.color = "red";
+            response.innerHTML = "The value of the field is not a number.";
+        }
+        else if (isNaN(textField.value)) {
+            response.style.color = "red";
             response.innerHTML = "The value of the field is not a number";
         }
         else {
             response.style.color = "black";
-            if (tempAll[0].checked) {
-                response.innerHTML = `The new Temperature is
+            if (tempAll[0].checked) response.innerHTML = `The new Temperature is
                 ${ex04.celsiusToFarenheitConverter(textField.value, 'C')}`;
-            }
+
             else response.innerHTML = `The new Temperature is
                 ${ex04.celsiusToFarenheitConverter(textField.value, 'F')}`;
         }
     }
 
 }
+btnNumericalConverter.onclick = function () {
+    functionName.innerHTML = "Number Converter"
+    for (let i = 0; i < tempAll.length; i++) {
+        tempAll[i].style.display = "inline-block";
+    }
+    tempAll[1].innerHTML = "B";
+    tempAll[3].innerHTML = "D";
+    modal.style.display = "block";
+    introText.textContent = `Enter a number, select B to convert from decimal to binary or D to
+    convert from Binary to decimal and press submit to do the conversion.`
+    submit.onclick = function () {
+        if (textField.value === "") {
+            response.style.color = "red";
+            response.innerHTML = "There are no numbers to convert.";
+        }
+        else if (isNaN(textField.value)) {
+            response.style.color = "red";
+            response.innerHTML = "The value of the field is not a number.";
+        }
+        else {
+            response.style.color = "black";
+            if (tempAll[0].checked) {
+                response.innerHTML = `The new number is
+                ${ex05.binToDecimal(textField.value, 'B')}.`;
+            }
+            else {
+                if (!checkString(textField.value)) {
+                    response.style.color = "red";
+                    response.innerHTML = `The number entered is not a binary.`
+                }
+                else response.innerHTML = `The new number is
+                ${ex05.binToDecimal(textField.value, 'D')}.`;
+
+            }
+        }
+    }
+
+}
+
+btnDiscount.onclick = function () {
+    functionName.innerHTML = "Apply Discount"
+    modal.style.display = "block";
+    introText.textContent = `Enter a number, and a discount you want to apply to that number and
+    press submit to apply it.`
+    textField02.style.display = "inline-block";
+    submit.onclick = function () {
+        if (textField.value === "") {
+            response.innerHTML = "There are no number to apply that discount";
+            response.style.color = "red";
+        }
+        else if (isNaN(textField.value)) {
+            response.style.color = "red";
+            response.innerHTML = "It should be a number in the first field.";
+        }
+        else if (textField02.value === "") {
+            response.innerHTML = "There are no discount to apply to the number";
+            response.style.color = "red";
+        }
+        else if (isNaN(textField02.value)) {
+            response.style.color = "red";
+            response.innerHTML = "The discount is not a number.";
+        }
+        else if (textField02.value < 1) {
+            response.style.color = "red";
+            response.innerHTML = "The discount can not be negative or zero.";
+        }
+        else if (textField02.value > 99) {
+            response.style.color = "red";
+            response.innerHTML = "The discount can't be bigger than 99.";
+        }
+        else {
+            response.style.color = "black";
+            response.innerHTML = `New Sentence:
+            ${ex05.discount(textField.value, textField02.value)}`;
+        }
+    }
+
+}
+
+btnYearsPassed.onclick = function () {
+    functionName.innerHTML = "How Many Years Have Passed?"
+    modal.style.display = "block";
+    textField.type = "date";
+    introText.textContent = `Select a date and press submit to know how many years have passed from that date.`
+    submit.onclick = function () {
+        if (!textField.value) {
+            response.style.color = "red";
+            response.innerHTML = "You need to select a date.";
+        }
+        else {
+            response.style.color = "black";
+            response.innerHTML = ` ${ex05.yearsPassed(textField.value)} years have passed since that date`;
+        }
+
+    }
+}
+
+
+function checkString(str) {
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] !== "0" && str[i] !== "1") {
+            return false;
+        }
+    } return true
+}
+
 
 span.onclick = function () {
     modal.style.display = "none";
