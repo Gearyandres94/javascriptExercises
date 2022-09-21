@@ -2,7 +2,9 @@ import ex from './01.js';
 import ex02 from './02.js';
 import ex03 from './03.js';
 import ex04 from './04.js';
-import ex05 from './05.js'
+import ex05 from './05.js';
+import ex06 from './06.js';
+import ex07 from './07.js';
 
 const modal = document.getElementsByClassName("modal")[0];
 const functionName = document.getElementsByClassName("functionName")[0];
@@ -25,11 +27,17 @@ const btnPalindromeNumber = document.getElementById("palindromeNumber");
 const btnFactorial = document.getElementById("factorial");
 const btnIsPrimeNumber = document.getElementById("primeNumber");
 const btnIsNumberEven = document.getElementById("numberIsEven");
-const btnCelsiusToFarenheitConverter = document.getElementById("celsiusToFarenheitConverter");
+const btnCelsiusToFahrenheitConverter = document.getElementById("celsiusToFahrenheitConverter");
 const tempAll = document.getElementsByClassName("temp");
 const btnNumericalConverter = document.getElementById("numericalConverter");
 const btnDiscount = document.getElementById("discount");
 const btnYearsPassed = document.getElementById("yearsPassed");
+const btnNumberOfLetters = document.getElementById("numberOfLetters");
+const btnValidName = document.getElementById("validName");
+const btnValidEmail = document.getElementById("validEmail");
+const btnArrayElevatedToSquare = document.getElementById("arrayElevatedToSquare");
+const btnHighAndLowNumbers = document.getElementById("highAndLowNumbers");
+const btnOddAndEvenNumber = document.getElementById("oddAndEvenNumber");
 
 btnCountChar.onclick = function () {
     functionName.innerHTML = "Count Characters"
@@ -215,14 +223,11 @@ btnRandom.onclick = function () {
 btnPalindromeNumber.onclick = function () {
     functionName.innerHTML = "Palindrome Number"
     modal.style.display = "block";
+    textField.type = "number";
     introText.textContent = "Enter a number and press submit to know if that number is a Palindrome Number."
     submit.onclick = function () {
         if (textField.value === "") {
             response.innerHTML = "The field is empty";
-            response.style.color = "red";
-        }
-        else if (isNaN(textField.value)) {
-            response.innerHTML = "The field is not a number";
             response.style.color = "red";
         }
         else {
@@ -236,14 +241,11 @@ btnPalindromeNumber.onclick = function () {
 btnFactorial.onclick = function () {
     functionName.innerHTML = "Factorial"
     modal.style.display = "block";
+    textField.type = "number";
     introText.textContent = "Enter a number and press submit to know the factorial of that number."
     submit.onclick = function () {
         if (textField.value === "") {
             response.innerHTML = "The field is empty";
-            response.style.color = "red";
-        }
-        else if (isNaN(textField.value)) {
-            response.innerHTML = "The field is not a number";
             response.style.color = "red";
         }
         else if (textField.value < 1) {
@@ -260,14 +262,11 @@ btnFactorial.onclick = function () {
 btnIsPrimeNumber.onclick = function () {
     functionName.innerHTML = "Is Number a Prime?"
     modal.style.display = "block";
+    textField.type = "number";
     introText.textContent = `Enter a number a press submit to know if the number is prime.`
     submit.onclick = function () {
         if (textField.value === "") {
             response.innerHTML = "The field is empty";
-            response.style.color = "red";
-        }
-        else if (isNaN(textField.value)) {
-            response.innerHTML = "The field is not a number";
             response.style.color = "red";
         }
         else if (textField.value == 0) {
@@ -285,18 +284,16 @@ btnIsPrimeNumber.onclick = function () {
         }
     }
 }
+
 btnIsNumberEven.onclick = function () {
     functionName.innerHTML = "Is Number even?"
     modal.style.display = "block";
+    textField.type = "number";
     introText.textContent = `Enter a number a press submit to know if the number is an even number.`
     submit.onclick = function () {
         if (textField.value === "") {
             response.innerHTML = "The field is empty";
             response.style.color = "red";
-        }
-        else if (isNaN(textField.value)) {
-            response.style.color = "red";
-            response.innerHTML = "The field is not a number";
         }
         else {
             response.style.color = "black";
@@ -306,13 +303,14 @@ btnIsNumberEven.onclick = function () {
     }
 }
 
-btnCelsiusToFarenheitConverter.onclick = function () {
+btnCelsiusToFahrenheitConverter.onclick = function () {
     functionName.innerHTML = "Temperature Converter"
     for (let i = 0; i < tempAll.length; i++) {
         tempAll[i].style.display = "inline-block";
     }
     tempAll[1].innerHTML = "C";
     tempAll[3].innerHTML = "F";
+    textField.type = "number";
     modal.style.display = "block";
     introText.textContent = `Enter a number, select F to convert from Celsius to Farenheit or C to
     convert from Farenheit to Celsius and press submit to do the conversion.`
@@ -332,14 +330,15 @@ btnCelsiusToFarenheitConverter.onclick = function () {
         else {
             response.style.color = "black";
             if (tempAll[0].checked) response.innerHTML = `The new Temperature is
-                ${ex04.celsiusToFarenheitConverter(textField.value, 'C')}`;
+                ${Math.round(ex04.celsiusToFarenheitConverter(textField.value, 'C'))}° C`;
 
             else response.innerHTML = `The new Temperature is
-                ${ex04.celsiusToFarenheitConverter(textField.value, 'F')}`;
+                ${Math.round(ex04.celsiusToFarenheitConverter(textField.value, 'F'))}° F`;
         }
     }
 
 }
+
 btnNumericalConverter.onclick = function () {
     functionName.innerHTML = "Number Converter"
     for (let i = 0; i < tempAll.length; i++) {
@@ -348,16 +347,13 @@ btnNumericalConverter.onclick = function () {
     tempAll[1].innerHTML = "B";
     tempAll[3].innerHTML = "D";
     modal.style.display = "block";
+    textField.type = "number";
     introText.textContent = `Enter a number, select B to convert from decimal to binary or D to
     convert from Binary to decimal and press submit to do the conversion.`
     submit.onclick = function () {
         if (textField.value === "") {
             response.style.color = "red";
             response.innerHTML = "There are no numbers to convert.";
-        }
-        else if (isNaN(textField.value)) {
-            response.style.color = "red";
-            response.innerHTML = "The value of the field is not a number.";
         }
         else {
             response.style.color = "black";
@@ -384,23 +380,17 @@ btnDiscount.onclick = function () {
     modal.style.display = "block";
     introText.textContent = `Enter a number, and a discount you want to apply to that number and
     press submit to apply it.`
+    textField.type = "number";
+    textField02.type = "number";
     textField02.style.display = "inline-block";
     submit.onclick = function () {
         if (textField.value === "") {
             response.innerHTML = "There are no number to apply that discount";
             response.style.color = "red";
         }
-        else if (isNaN(textField.value)) {
-            response.style.color = "red";
-            response.innerHTML = "It should be a number in the first field.";
-        }
         else if (textField02.value === "") {
             response.innerHTML = "There are no discount to apply to the number";
             response.style.color = "red";
-        }
-        else if (isNaN(textField02.value)) {
-            response.style.color = "red";
-            response.innerHTML = "The discount is not a number.";
         }
         else if (textField02.value < 1) {
             response.style.color = "red";
@@ -437,6 +427,124 @@ btnYearsPassed.onclick = function () {
     }
 }
 
+btnNumberOfLetters.onclick = function () {
+    functionName.innerHTML = "How Many Consonants and Vocals Are There?"
+    modal.style.display = "block";
+    introText.textContent = `Enter a sentence and press submit to know the number of consonants
+    and vocals are in the sentence.`
+    submit.onclick = function () {
+        if (!textField.value) {
+            response.style.color = "red";
+            response.innerHTML = "You need to enter a sentence.";
+        }
+        else {
+            response.style.color = "black";
+            response.innerHTML = ex06.typeOfLetters(textField.value);
+        }
+
+    }
+}
+
+btnValidName.onclick = function () {
+    functionName.innerHTML = "Is The Name Valid?"
+    modal.style.display = "block";
+    introText.textContent = `Enter a name and press submit to check if it's valid.`
+    submit.onclick = function () {
+        if (!textField.value) {
+            response.style.color = "red";
+            response.innerHTML = "You need to enter a name.";
+        }
+        else {
+            response.style.color = "black";
+            response.innerHTML = ex06.validName(textField.value) ? `The name is valid` : `The name is invalid`;
+        }
+
+    }
+}
+
+btnValidEmail.onclick = function () {
+    functionName.innerHTML = "Is The Email Valid?"
+    modal.style.display = "block";
+    introText.textContent = `Enter an email and press submit to check if it's valid.`
+    submit.onclick = function () {
+        if (!textField.value) {
+            response.style.color = "red";
+            response.innerHTML = "You need to enter an email.";
+        }
+        else {
+            response.style.color = "black";
+            response.innerHTML = ex06.validEmail(textField.value) ? `The email is valid` : `The email is invalid`;
+        }
+
+    }
+}
+
+btnArrayElevatedToSquare.onclick = function () {
+    functionName.innerHTML = "Array raised to Power 2"
+    modal.style.display = "block";
+    introText.textContent = `Enter several numbers separated by a "," and press submit
+    to raise all the numbers to potency 2.`
+    submit.onclick = function () {
+        if (!textField.value) {
+            response.style.color = "red";
+            response.innerHTML = "You need to enter at least a number";
+        }
+        else if (!checkArrayMembers(textField.value)) {
+            response.style.color = "red";
+            response.innerHTML = "One of the entered numbers is not a number, please check it";
+        }
+        else {
+            response.style.color = "black";
+            response.innerHTML = `The numbers raised to potency 2 are
+            ${ex07.arrayElevatedToSquare(textField.value)}`;
+        }
+
+    }
+}
+
+btnHighAndLowNumbers.onclick = function () {
+    functionName.innerHTML = "Highest And Low Numbers"
+    modal.style.display = "block";
+    introText.textContent = `Enter several numbers separated by a "," and press submit
+    to know which is the biggest and the smallest.`
+    submit.onclick = function () {
+        if (!textField.value) {
+            response.style.color = "red";
+            response.innerHTML = "You need to enter at least a number";
+        }
+        else if (!checkArrayMembers(textField.value)) {
+            response.style.color = "red";
+            response.innerHTML = "One of the entered numbers is not a number, please check it";
+        }
+        else {
+            response.style.color = "black";
+            response.innerHTML = ex07.highAndLowNumbers(textField.value);
+        }
+
+    }
+}
+
+btnOddAndEvenNumber.onclick = function () {
+    functionName.innerHTML = "Even And Odd Numbers"
+    modal.style.display = "block";
+    introText.textContent = `Enter several numbers separated by a "," and press submit
+    to know which are the odd numbers and which are the even numbers.`
+    submit.onclick = function () {
+        if (!textField.value) {
+            response.style.color = "red";
+            response.innerHTML = "You need to enter at least a number";
+        }
+        else if (!checkArrayMembers(textField.value)) {
+            response.style.color = "red";
+            response.innerHTML = "One of the entered numbers is not a number, please check it";
+        }
+        else {
+            response.style.color = "black";
+            response.innerHTML = ex07.evenAndOddNumbers(textField.value);
+        }
+
+    }
+}
 
 function checkString(str) {
     for (let i = 0; i < str.length; i++) {
@@ -446,12 +554,19 @@ function checkString(str) {
     } return true
 }
 
+function checkArrayMembers(str) {
+    const arrayNum = str.split(',').map(Number);
+    for (let i = 0; i < arrayNum.length; i++) if (isNaN(arrayNum[i])) return false;
+    return true;
+}
+
 
 span.onclick = function () {
     modal.style.display = "none";
     response.textContent = "";
     textField.style.display = "inline-block";
     textField02.style.display = "none";
+    textField.type = "text";
     textField02.type = "text";
     for (let i = 0; i < tempAll.length; i++) {
         tempAll[i].style.display = "none";
