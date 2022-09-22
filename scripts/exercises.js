@@ -5,6 +5,7 @@ import ex04 from './04.js';
 import ex05 from './05.js';
 import ex06 from './06.js';
 import ex07 from './07.js';
+import ex08 from './08.js';
 
 const modal = document.getElementsByClassName("modal")[0];
 const functionName = document.getElementsByClassName("functionName")[0];
@@ -38,6 +39,9 @@ const btnValidEmail = document.getElementById("validEmail");
 const btnArrayElevatedToSquare = document.getElementById("arrayElevatedToSquare");
 const btnHighAndLowNumbers = document.getElementById("highAndLowNumbers");
 const btnOddAndEvenNumber = document.getElementById("oddAndEvenNumber");
+const btnSortArray = document.getElementById("sortArray");
+const btnDeleteDuplicated = document.getElementById("deleteDuplicated");
+const btnArrayMedian = document.getElementById("arrayMedian");
 
 btnCountChar.onclick = function () {
     functionName.innerHTML = "Count Characters"
@@ -541,6 +545,72 @@ btnOddAndEvenNumber.onclick = function () {
         else {
             response.style.color = "black";
             response.innerHTML = ex07.evenAndOddNumbers(textField.value);
+        }
+
+    }
+}
+
+btnSortArray.onclick = function () {
+    functionName.innerHTML = "Order The Numbers"
+    modal.style.display = "block";
+    introText.textContent = `Enter several numbers separated by a "," and press submit
+    to order them from minor to mayor and mayor to minor.`
+    submit.onclick = function () {
+        if (!textField.value) {
+            response.style.color = "red";
+            response.innerHTML = "You need to enter at least a number";
+        }
+        else if (!checkArrayMembers(textField.value)) {
+            response.style.color = "red";
+            response.innerHTML = "One of the entered numbers is not a number, please check it";
+        }
+        else {
+            response.style.color = "black";
+            response.innerHTML = ex08.sortArray(textField.value);
+        }
+
+    }
+}
+
+btnDeleteDuplicated.onclick = function () {
+    functionName.innerHTML = "Delete Duplicates"
+    modal.style.display = "block";
+    introText.textContent = `Enter several numbers separated by a "," and press submit
+    to delete the duplicated numbers.`
+    submit.onclick = function () {
+        if (!textField.value) {
+            response.style.color = "red";
+            response.innerHTML = "You need to enter at least a number";
+        }
+        else if (!checkArrayMembers(textField.value)) {
+            response.style.color = "red";
+            response.innerHTML = "One of the entered numbers is not a number, please check it";
+        }
+        else {
+            response.style.color = "black";
+            response.innerHTML = ex08.deleteDuplicated(textField.value);
+        }
+
+    }
+}
+
+btnArrayMedian.onclick = function () {
+    functionName.innerHTML = "Median Of a Group Of Numbers"
+    modal.style.display = "block";
+    introText.textContent = `Enter several numbers separated by a "," and press submit
+    to know the median of those numbers.`
+    submit.onclick = function () {
+        if (!textField.value) {
+            response.style.color = "red";
+            response.innerHTML = "You need to enter at least a number";
+        }
+        else if (!checkArrayMembers(textField.value)) {
+            response.style.color = "red";
+            response.innerHTML = "One of the entered numbers is not a number, please check it";
+        }
+        else {
+            response.style.color = "black";
+            response.innerHTML = ex08.arrayMedian(textField.value);
         }
 
     }

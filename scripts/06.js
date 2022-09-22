@@ -1,12 +1,12 @@
 
 const typeOfLetters = (str) => {
-    let vowelRegex = new RegExp(`[aeiou]`, 'gi');
-    let consonantRegex = new RegExp(`(?![aeiou])[a-z]`, 'gi');
+    let vowelRegex = new RegExp(`[aeiouáéíóú]`, 'gi');
+    let consonantRegex = new RegExp(`(?![aeiouáéíóú])[a-zñ]`, 'gi');
     let numberOfVocals = 0;
     let numberOfConsonants = 0;
-    for (let i = 0; i < str.length; i++) {
-        if (str[i].match(vowelRegex)) numberOfVocals++;
-        if (str[i].match(consonantRegex)) numberOfConsonants++;
+    for (let letter of str) {
+        if (letter.match(vowelRegex)) numberOfVocals++;
+        if (letter.match(consonantRegex)) numberOfConsonants++;
     }
     return `There are ${numberOfVocals > 0 ? numberOfVocals + " vocal" :
         "no vocals"}${numberOfVocals > 1 ? "s" : ""} and
@@ -17,7 +17,7 @@ const typeOfLetters = (str) => {
 
 
 const validName = (name) => {
-    const nameRegEx = /^[a-zA-Z'+ ]+$/;
+    const nameRegEx = /^[a-zA-ZÑñ'áéíóúÁÉÍÓÚ\s]+$/;
     if (nameRegEx.test(name)) return true
     else return false
 }
