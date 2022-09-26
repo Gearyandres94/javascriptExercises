@@ -566,7 +566,9 @@ btnSortArray.onclick = function () {
         }
         else {
             response.style.color = "black";
-            response.innerHTML = ex08.sortArray(textField.value);
+            const resp = ex08.sortArray(textField.value);
+            response.innerHTML = `The numbers sorted from minor to mayor are [${resp.arr1}]
+            and from mayor to minor are [${resp.arr2}]`;
         }
 
     }
@@ -626,7 +628,7 @@ function checkString(str) {
 
 function checkArrayMembers(str) {
     const arrayNum = str.split(',').map(Number);
-    for (let i = 0; i < arrayNum.length; i++) if (isNaN(arrayNum[i])) return false;
+    for (let num of arrayNum) if (isNaN(num)) return false;
     return true;
 }
 
@@ -638,6 +640,7 @@ span.onclick = function () {
     textField02.style.display = "none";
     textField.type = "text";
     textField02.type = "text";
+    textField.value = "";
     for (let i = 0; i < tempAll.length; i++) {
         tempAll[i].style.display = "none";
     }

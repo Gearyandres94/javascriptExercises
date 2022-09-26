@@ -9,22 +9,19 @@ const arrayElevatedToSquare = (str) => {
 const highAndLowNumbers = (str) => {
     const arrayNum = str.split(',').map(Number);
     let lowestNumber = arrayNum[0], highestNumber = arrayNum[0];
-    for (let i = 0; i < arrayNum.length; i++) {
-        if (arrayNum[i] > highestNumber) highestNumber = arrayNum[i];
-        if (arrayNum[i] < lowestNumber) lowestNumber = arrayNum[i];
+    for (let num of arrayNum) {
+        if (num > highestNumber) highestNumber = num;
+        if (num < lowestNumber) lowestNumber = num;
     }
     return `The biggest number is ${highestNumber} and the smallest number is ${lowestNumber}`;
 };
 
 const evenAndOddNumbers = (str) => {
     const arrayNum = str.split(',').map(Number);
-    const evenNum = [];
-    const oddNum = [];
+    const evenNum = [], oddNum = [];
 
-    for (let i = 0; i < arrayNum.length; i++) {
-        if (arrayNum[i] % 2 !== 0) oddNum.push(arrayNum[i]);
-        else evenNum.push(arrayNum[i]);
-    }
+    for (let num of arrayNum) num % 2 !== 0 ? oddNum.push(num) : evenNum.push(num);
+
     return `The even numbers are [${evenNum.join()}] and the odd numbers are [${oddNum.join()}]`;
 };
 

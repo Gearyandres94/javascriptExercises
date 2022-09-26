@@ -1,10 +1,8 @@
 const sortArray = (str) => {
-    const arrayNum = str.split(',').map(Number);
-    const arr1 = arrayNum.sort((a, b) => a - b);
-    const arr2 = [];
+    const arrayNum = str.split(',').map(Number), arr1 = arrayNum.sort((a, b) => a - b), arr2 = [];
     for (let i = arr1.length - 1; i >= 0; i--) arr2.push(arr1[i]);
-    return `The numbers sorted from minor to mayor are [${arr1.join()}]
-    and from mayor to minor are [${arr2.join()}]`
+    const responseObj = { arr1, arr2 };
+    return responseObj;
 };
 
 const deleteDuplicated = (str) => {
