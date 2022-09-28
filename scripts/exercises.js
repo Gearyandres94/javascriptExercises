@@ -42,6 +42,7 @@ const btnOddAndEvenNumber = document.getElementById("oddAndEvenNumber");
 const btnSortArray = document.getElementById("sortArray");
 const btnDeleteDuplicated = document.getElementById("deleteDuplicated");
 const btnArrayMedian = document.getElementById("arrayMedian");
+const btnMovieDatabase = document.getElementById("movieDatabase");
 
 btnCountChar.onclick = function () {
     functionName.innerHTML = "Count Characters"
@@ -618,6 +619,60 @@ btnArrayMedian.onclick = function () {
     }
 }
 
+btnMovieDatabase.onclick = function () {
+    functionName.innerHTML = "Class Movie";
+    textField.style.display = "none";
+    modal.style.display = "block";
+    introText.textContent = `This exercise can only be seen in the console.
+    Please open the console and press submit.`;
+    submit.onclick = function () {
+        response.style.color = "black";
+        response.innerHTML = "Running exercises";
+        console.info(`It's being created an instance of a class called Movie with several
+        parameters. `)
+        // const movie01 = new Movie({
+        //     id: `aa1234567`,
+        //     director: "Dom",
+        //     title: "Abba",
+        //     year: 2020,
+        //     country: ["Cuba"],
+        //     genres: ["Comedy"],
+        //     score: 6.789
+        // });
+        // movie01.showMovieData();
+        const movieArray = [
+            {
+                id: `aa1234567`,
+                director: "Dom",
+                title: "Dark Knight",
+                year: 2020,
+                country: ["Cuba"],
+                genres: ["Comedy"],
+                score: 6.789
+            },
+            {
+                id: `aa1234567`,
+                director: "Dom",
+                title: "Into the wild",
+                year: 2020,
+                country: ["Cuba"],
+                genres: ["Comedy"],
+                score: 6.789
+            },
+            {
+                id: `aa1234567`,
+                director: "Rocky Balboa",
+                title: "Abba",
+                year: 2020,
+                country: ["Cuba"],
+                genres: ["Comedy"],
+                score: 6.789
+            }
+        ]
+        movieArray.forEach(el => new Movie(el).showMovieData());
+    }
+}
+
 function checkString(str) {
     for (let i = 0; i < str.length; i++) {
         if (str[i] !== "0" && str[i] !== "1") {
@@ -633,6 +688,120 @@ function checkArrayMembers(str) {
 }
 
 
+class Movie {
+    constructor({ id, title, director, year, country, genres, score }) {
+        this.id = id;
+        this.title = title;
+        this.director = director;
+        this.year = year;
+        this.country = country;
+        this.genres = genres;
+        this.score = score;
+
+        this.validateIMDB(id);
+        this.validateTitle(title);
+        this.validateDirector(director);
+        this.validateYear(year);
+        this.validateCountry(country);
+        this.validateGenre(genres);
+        this.validateScore(score);
+    }
+    validateNumber(property, value) {
+        if (!value) return console.warn(`${property} "${value}" is empty.`);
+        if (typeof value !== "number") return console.error(`${property} "${value}" is not a Number`);
+        return true;
+    }
+
+    validateString(str, value) {
+        if (!value) return console.warn(`${str} "${value}" is empty.`);
+        if (typeof value !== "string") return console.error(`${str} "${value}" is not a String`);
+        return true;
+    }
+
+    validateArray(property, value) {
+        if (!value) return console.warn(`${property} "${value}" is empty.`);
+        if (!(value instanceof Array)) return console.error(`${property} "${value}" is not an array`);
+
+        if (value.length === 0) return console.error(`${property} "${value}" is an empty array`);
+
+        for (let str of value) {
+            if (typeof str !== "string") return console.error(`${str} is not a String`);
+        }
+    }
+
+    validateIMDB(id) {
+        if (this.validateString("IMDB ID", id)) {
+            if (!(/^([a-z]){2}([0-9]){7}$/.test(id))) return console.error(`"IMDB ID" ${id}
+            is not valid, it should have 9 chars,
+            the 2 first should be lowercase letters, and the rest numbers`)
+        }
+    };
+
+    validateTitle(title) {
+        if (this.validateString("Title", title)) {
+            this.validateStringLength("Title", title, 100);
+        }
+    };
+
+    validateDirector(director) {
+        if (this.validateString("Director", director)) {
+            this.validateStringLength("Director", director, 50);
+        }
+    };
+
+    validateYear(year) {
+        if (this.validateNumber("Release Year", year)) {
+            if (!(/^([0-9]){4}$/.test(year))) return console.error(`"Release Year" ${year}
+            is not valid, it should be a number of 4 digits`);
+        }
+    };
+
+    validateCountry(country) {
+        this.validateArray("Country", country);
+    }
+
+    validateGenre(genres) {
+        this.validateArray("Genres", genres);
+        for (let genre of genres) if (!Movie.getGenres().includes(genre)) {
+            console.error(`Incorrect Genres ${genres.join()}`);
+            Movie.acceptedGenres();
+        }
+    }
+
+    validateScore(score) {
+        if (this.validateNumber("Score", score)) {
+            return (score < 0 || score > 10) ?
+                console.error(`The score should be in a range between 0 and 10`)
+                : this.score = score.toFixed(1);
+        }
+    };
+
+    validateStringLength(property, value, max) {
+        if (value.length > max) return console.error(`${property} "${value}
+        it's bigger than the number of allowed characters"`);
+        return true;
+    }
+
+    static getGenres() {
+        return ["Action", "Adult", "Adventure", "Animation", "Biography",
+            "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "Film Noir",
+            "Game Show", "History", "Horror", "Musical", "Music", "Mystery", "News", "Reality",
+            "Romance", "SciFi", "Short", "Sport", "Talk-Show", "Thriller", "War", "Western"]
+    }
+
+    static acceptedGenres() {
+        return console.info(`The accepted Genres are ${Movie.getGenres().join()}`);
+    }
+
+    showMovieData() {
+        console.info(`Data of the Movie:\nTitle:"${this.title}".\nDirector:"${this.director}".
+        Release Year:"${this.year}".\nCountry: "${this.country}".\nGenres:"${this.genres.join()}".Score: "${this.score}".
+        IMDB Id: "${this.id}".`);
+    }
+}
+
+
+
 span.onclick = function () {
     modal.style.display = "none";
     response.textContent = "";
@@ -641,7 +810,4 @@ span.onclick = function () {
     textField.type = "text";
     textField02.type = "text";
     textField.value = "";
-    for (let i = 0; i < tempAll.length; i++) {
-        tempAll[i].style.display = "none";
-    }
 }
